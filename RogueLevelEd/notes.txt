@@ -1,0 +1,224 @@
+Here are some notes by fennorangrithon that could help you creating rooms. The editor itself doesn't always provide a way to change things, so sometimes you have to open the XML file and change some details yourself. (Like changing "scaleX=1" to "scaleX=2" if you want objects to have a proper size. Keep in mind that after you have changed something in the XML file manually you have to reload/clear the editor again end load to XML into the editor again, otherwise you will revert the changes in the XML file the next time you save the changes from the editor into the XML file.
+
+Browser Info: Works better with Google chrome than with Mozilla Firefox (at least for me, maybe there are problems with addons) With Firefox every added Item appears at the top left corner of the room instead of where my cursor is, so I have to drag it all the way.
+
+Relevant names:
+
+Rooms: (Room names often also require certain tags, so also take a look at the tags I listed)
+
+-Linker: Probably makes them only appear at the border of an area
+-EntranceBoss: Probably makes them only appear once per area
+-Secret: Fairy Chest Room. Not sure what it does, they work without the name. Maybe has something to do with the Waypoint enemy orbs
+-Start: Required for outdoor start room
+-rers: ????? Is used in Maps_Special for a room with two chests and a horse
+-CastleEntrance: Required for first castle room
+-Bonus: Required for the chest in Miniboss rooms to work properly, also itempickup, teleporter etc. rooms are bonus
+-Boss: Rquired for Boss rooms
+-ChallengeBoss: 2nd form bosses
+-ChallengeBoss12412: Brohannes test?
+-ChallengeBoss123: EyeballChallenge test?
+-ChallengeBoss12: EyeballChallenge test?
+-ChallengeBoss125125125: Brohannes test?
+-teststss:
+-f: Also a test room?
+-Tutorial:
+-Throne: Last Boss?
+-Ending: Credits Room
+-Compass: The secret door room that can be found with a compass
+
+Interactive sprites: (All these only work if the room is named: "Bonus", also the room needs the right "tag". You can find tags below. If a room is called Bonus and has the tag for one of these sprites while there is no sprite with such a name, the game will crash. You can also make things like a manaItem room, but use a different sprite and call it pedestal. So you can make a ManaItem flying over a bush or an IronMaiden.
+
+-BossDoor: For CastleDoorOpenSprite in EntranceBoss Rooms
+-LastDoor: For the LastDoor Sprite in the first room
+-pedestal: SpecialItemStatue and mana item pickup
+-Jukebox: Jukebox
+-portrait: CellarDoorHistory portrait
+-teleporter: RandomTeleporter
+-diary: diary
+-fountain: Fountain that restores mana and health
+
+Chests, Floors, Borders...:
+
+-Top, Left, Right, or buttom: Probably makes them only appear if a door is on this side
+-t: ???? (Possibly teleporter?)
+-Floor: ???? Used for a floor in chest game and mana item pickup
+-GatePosition: The gate for the chest game room
+-Health: Gives breakable objects a 100% chance for a chicken to appear
+-Mana: Gives breakable objects a 100% chance for a bottle to appear
+
+Enemies.
+
+-Orbs only creates random enemies that belong to the current area
+-OrbType 0-4 will create random enemies that scale with level (Are "basic" at low, "advanced" at middle, and "expert" at high levels)
+-OrbType 5 will create a random expert enemy
+-enemies with the same OrbType will always have the same enemyTypes, expect when one of them is "ForcedFlying", then it will create a flying enemy instead
+-IsWaypoint something about FairyChests? Don't know what they do, but I think IsWaypoint "True" can only be found in fairy chest rooms near the doors when looking at the original maps. (Could it be something to prevent 2 Fairy Chest rooms being too close together?)
+-If a room contains both, regular enemies and things like spikes/turrets and platforms, you should place the regular enemies after placing the other stuff to ensure that the "other stuff" is in the background.
+-In order to have turrets work, tag has to be used like in this example: tag="delay:2.5, speed:750" (low values for delay will make them shoot more frequently, higher speed will make the Fireballs fly faster)
+-Spike traps and turrets on the floor can require y positions that aren't devidable by 30. I manually added +15 on the height manually. (change width if they are on the walls)
+-For turrets I manually added +4 on height if they are on the floor.
+-Flip and rotation useful for turrets. Spike traps won't rotate the detection point, so rotation is not optimal for them, but they still work.
+-Flip can be useful sometimes, for example if you want horses to run away from right doors first.
+-Rotating Eyeballs by 180° makes them look away from you, rotating does not work well with most other enemies.
+
+FairyChest Tag values.
+
+0=No special codition
+1=Defeat all enemies
+2=Low Health (not implemented? Or is that for LichKing and you actually require 1 Health? Tested it only with 4 health)
+3=No Looking
+4=No jumping
+5=No noise (not implemented?)
+6=Don'T touch the floor (Only has a certain range. Never used but implemented)
+7=no Fighting
+8=Reach me in time
+9=Take no damage
+10=Invisible chest
+
+RoomObject Tag values.
+
+1=Chest game room, also Eyeball Boss
+2=Johannes Boss Room, also SpecialItemStatue room, also CastleEntrance room
+3=random portal room, also used for a testroom with name "f"?, also compass room
+4=mana weapon pickup room
+5=Skull Boss room, also healingwell room
+6=Fireball Boss room, also Diary room
+7=slime Boss room, also portrait CellarDoorgames history room
+8=knife Clown Room
+9=axe Clown Room
+10=Miniboss Room
+11=Music Box room
+
+-Specific things about Miniboss rooms: Chest will only appear after room is cleared if also room name is "Bonus", make sure that the chest is placed near the center of the room, otherwise the quesion mark on the map won't be replaced by a grayed out chest symbol after looting the chest. For some reason, after looting the chest and leaving the room, enemies like Spike traps, turrets and platforms will disappear when entering the room again, so don't make
+miniboss rooms where you can get stuck because platforms disappeared. (The "enemy" platform, not regular platforms)
+
+Important things about objects:
+
+-Standard X and Y "scale" should be 2.
+-For most objects/sprites/chests "flip" can be useful for aesthetic reasons. Keep in mind that while for some objects in one area type the attribute doesn't matter since they are symmetric, but the other versions of the object for the other areas may not be symmetric, so you still should have the flip attribute in mind.
+-"LevelType" should set on "1", so that Castle objects are converted to the correct objects of the other areas.
+-LeveelType 0 is recommended for things like angel statues.
+-For PhysicsObj "SpriteName="CastleAssetBookcase_Sprite" and some other stuff is missing, making the game crash. This one is really annoying, since you can't just change it in the xml file, then load it into the editor and then save again, because when saving it will be removed again. (Could just use the book cases of spriteObj, but you can't stand on them)
+-Windows should be BG layer, also things like book cases when they are too close to walls, so that they are not in front of the wall. There is no need to make things like torches BG layer I think, maybe if they are supposed to be behind another object.
+-when copy pasting objects or sprites very often the name is not copied, doesn't happen with things like enemies
+-Webs that appear in all areas (LevelType0) should not be BGLayer, otherwise they will be pink in garden area (maybe same for some other sprites? Generally you only need to have BGLayer true if they are behind something or are windows that show BackGround behind them)
+-If two sprites are both BGLayer - or both not, but you want a certain sprite to be infront of the other, simply add the sprite that is supposed to be in front after the other sprite.
+-weighted is useful for urns or barrels that stand on other barrels or tables, so that they will fall after destroying the table. You use unweighted urns with LevelType1 and place them on Fireplaces with LevelType1, it won't be a problem for the other areas, since the tower also has Fireplaces where the urn equivalent can stand on. The urns wouldn't fit the garden's and dungeon's fireplace equivalent (fountain and maiden), but that's not a problem since urns with LevelType1 will disappear in those areas either way.
+-If windows with LevelType1 are too close, the tower version of windows (holes) can overlap
+which may looks weird.
+-I think "Collidable" is only relevant for PhysicsObjects (BookCases). Decides whether you can stand on them or not.
+-Be careful with too big sprites when they are rotated by 90°. I made a horizontal Pillar, it only loads the sprite when you are close enough, the range is low enough so that you can still see it disappearing on the screen.
+-weighted book cases are moveable
+-can even add weitghted manually to things like chests
+
+Possible reasons why map doesn't appear in the game or game crashes uppon building:
+
+-Forgot to remove the playerObject, this is only for testmode.
+-Forgot to put the xml file in a folder like mentioned on the website.
+-The xml file has the wrong name, has to be "Map_XXXX" while "XXXX" shouldn't be too complex.
+-simply haven't been lucky with the random map generator, just copy the file a few times to improve the chances. (name shouldn't be "Map_XXXX copy - (1)", call it "Map_XXXX2")
+-Maybe there is something wrong with the doors so that there is no entrance for your room
+-Room has Bonus name and/or tag of a Bonus room, but has no chest that can be converted into a bonus chest.
+-rooms shouldn't be longer than width 3, otherwise it gets buggy/crashes
+-rooms shouldn't be higher than height 4, otherwise it gets buggy/crashes
+-rooms shouldn't be larger/higher than 3x2 or 2x3 otherwise it gets buggy/crashes (maybe 3x3)
+-accidently put two chests on the same spot, so that it crashes when opening the chest.
+
+Other Notes:
+
+-Left and right door marks don't fit. floor must be 2 steps (60) higher, roof is ok.
+-Chests shouldn't be too close one after another, otherwise map will gray out the wrong chest. (You even have to consider other rooms. For example chests shouldn't be at the very top of the room, because there are chests that are at the very bottom of rooms that can be too close if this room is directly above the other one. But even original rooms don't always consider this)
+-Border that collides only top creates a platform (together with normal wall that also only collides top
+-If the Border has a height of only 1 (<60), the platform will be darker (also useful for secret paths I guess)
+-Floors with height of less than 60 are invisible
+-You can rotate long borders with width of 30 by 90° in order to get vertical dark borders.
+-While floors that only collide on top (platforms) are invisible, floors that collide on no side are visible and used for secret paths.
+-Next to doors the floor shouldn't have borders, as the door will add them automatically.
+-rotation necessary for hazards. Other than flip it will change the position of the spikes, so the whole thing will rotate around X=0 y=0 / the upper left corner.
+-diagonal floors obviously also require unusual widths or heights. Built 45° floors that go from buttom left to top right by adding a floor at the top left side and then rotating it by 45° and use height that is about equal (make it just a little higher so that you can walk smoothly on it) to height of the stairs multiplied by square root of 2.
+-diagonal ceilings not recommended, since you can jump/dash into them.
+-RoguePatch.ini [TestRoom] roomflipped=true option would be nice
+-would be nice if you could change width and height of tiles manually
+-would be nice if copy pasting a tile which postion isn't dividable by 30 still isn't after pasting (when I copy a x=35 y=35 tile and paste to x=0 y=0 it should be at x=5 y=5)
+-There should only be one PlayerOrb
+-Is Name or Tag of rooms relevant for chance of appearance?
+-For some rooms (especially fairy chest rooms) floors that can be passed in only one direction are useful. I think this only works in the from-top-to-button direction (can fall through it, but can't jump up again). Recommended to make one floor that only collides on bottom and a second one at the same spot that only colides on top, so that you don't fall through it automatically, but have to down jump.
+-You can name things name="Top" or name="!Top" or name="TopRight" and other combinations. I believe this can be used for things like chests if you want them to appear only when a certain door exists (or doesn't exist).
+-Testroom not showing everything correctly? LevelType1 sprites of portraits don't appear in tower area of testrooms, even though they do in the normal game mode.
+-XXXXpool="false" does not work for compass rooms, they will still appear. I also think that you can't make additional compass rooms while having the game randomly pick them, maybe it just takes the compass room that it finds first. Probably because they aren't part of the random generation. Probably also the case for boss rooms
+-to avoid having characters with traits that make them huge getting stuck, you should make all paths have a width of at least 3 tiles and height of 5 tiles.
+
+
+
+############################## NOTES BELOW FROM R4WIZARD ##############################
+
+
+
+Special Room Names:
+- Linker: changes minimap icon and adds to teleport list.
+- EntranceBoss: changes minimap icon and adds to teleport list.
+- CastleEntrance: changes minimap icon and adds to teleport list.
+- Bonus: changes minimap icon.
+
+Rotation:
+ -315
+ -270
+ -225
+ -180
+ -135
+ -90
+ -45
+ 0
+ 45
+ 90
+ 135
+ 180
+ 225
+ 270
+ 315
+
+--- EnemyOrbObj
+Inserts randomized enemy based on current game difficulty. 
+
+  ScaleX: 3
+  ScaleY: 3
+  OrbType: 0,1,2,3,4,5   - Difficulty?
+  ForceFlying: should the enemy generated by forced to fly.
+  IsWaypoint: If IsWaypoint this becomes a special object that seems to be used for bonus rooms (carnival and 3 chests room).
+  
+--- ChestObj
+  Tag: 0,1,3,4,5,7,8,9,10 - type of fairy challenge
+  Fairy: true/false - is a fairy chest
+  
+  0: No Challenge
+  1: Defeat all Enemies
+  3: No Looking
+  4: No Jumping
+  6: Don't Touch the Floor
+  7: No Fighting
+  8: Reach Me in Time
+  9: Take no Damage
+  10: Chest is Invisible
+
+-- EnemyObj
+  Tag: delay:1.5, speed:750       only works for Turret/HomingTurret object
+
+
+SpriteObj_Sprites = ["LightSource_Sprite", CastleAssetWindow2_Sprite", "CastleAssetWindow1_Sprite", "CastleAssetWeb2_Sprite", "CastleAssetWeb1_Sprite", "CastleAssetFrame_Sprite", "DungeonMaiden1_Sprite", "TowerLever1_Sprite", "DungeonSewerGrate2_Sprite", "DungeonPrison1_Sprite", "StartingRoomWater_Sprite", "CastleAssetBookCase3_Sprite", "CastleDoorOpen_Sprite", "GardenBG_Sprite", "StartRoomMountains_Sprite", "StartRoomTree2_Sprite", "StartRoomTree3_Sprite", "StartRoomTree1_Sprite", "StartRoomGrass1_Sprite", "StartRoomGrass2_Sprite", "StartRoomGrass3_Sprite", "StartRoomGrass3Dark_Sprite", "StartRoomGrass1Dark_Sprite", "StartRoomGrass2Dark_Sprite", "StartRoomTree3Dark_Sprite", "StartRoomTree2Dark_Sprite", "StartRoomTree1Dark_Sprite", "ManorSign_Sprite", "StartingRoomFloor_Sprite", "StartingRoomRockTop_Sprite", "StartingRoomFloorEnd_Sprite", "StartingRoomChain_Sprite", "StartingRoomBridge_Sprite", "StartingRoomRockSlope_Sprite", "StartingRoomRockBottom_Sprite", "CastleAssetBookCase2_Sprite", "CastleAssetBookcase_Sprite", "DungeonPrison2_Sprite", "DungeonPrison3_Sprite", "GardenBush2_Sprite", "GardenBush1_Sprite", "GardenFloatingRock1_Sprite", "GardenFloatingRock2_Sprite", "GardenFloatingRock4_Sprite", "GardenFloatingRock3_Sprite", "GardenFloatingRock5_Sprite", "GardenVine2Piece1_Sprite", "TowerHole3_Sprite", "TowerHole2_Sprite", "TowerHole1_Sprite", "TowerHole4_Sprite", "TowerHole6_Sprite", "TowerHole9_Sprite", "TowerHole7_Sprite", "SpecialItemStatue_Sprite", "BonusRoomDiary_Sprite", "TeleporterBase_Sprite", "TowerPedestal1_Sprite", "HealingFountain_Sprite", "CastleMap_Sprite", "CarnivalFlags_Sprite", "CarnivalTent_Sprite", "CarnivalPoster2_Sprite", "CarnivalPoster1_Sprite", "CarnivalPoster3_Sprite", "CastleDoor_Sprite", "StainGlassBorder_Sprite", "StainGlassWindow3_Sprite", "StainGlassWindow2_Sprite", "StainGlassWindow1_Sprite", "StainGlassWindowBricks_Sprite", "Jukebox_Sprite"];
+
+ObjContainer_Sprites = ["CastleAssetBackTorch_Character", "CastleBGPillar_Character", "CastleAssetSideTorch_Character", "CastleAssetFireplace_Character", "DungeonMaiden3_Character", "DungeonMaiden2_Character", "DungeonMaiden1_Character", "DungeonChain1_Character", "CastleAssetFireplaceNoFire_Character", "DungeonChain2_Character", "LastDoor_Character", "GardenPillar_Character", "GardenFountain_Character", "CarnivalBalloon1_Character", "CarnivalBalloon2_Character", "CarnivalBalloon3_Character", "FountainOfYouth_Character"]
+
+PhysicsObjContainer_Sprites = ["BreakableBarrel1_Character", "BreakableBarrel2_Character", "CastleAssetChandelier1_Character", "CastleAssetCandle1_Character", "CastleAssetKnightStatue_Character", "CastleAssetCandle2_Character", "BreakableChair2_Character", "CastleAssetTable1_Character", "CastleAssetUrn1_Character", "CastleAssetUrn2_Character", "CastleAssetChandelier2_Character", "CastleAssetTable2_Character", "BreakableChair1_Character", "DungeonHangingCell2_Character", "CastleAssetAngelStatue_Character", "CastleAssetDemonStatue_Character", "TowerBust2_Character", "BreakableCrate1_Character", "DungeonHangingCell1_Character", "CastleBGPillar_Character", "GardenLampPost2_Character", "GardenLampPost1_Character", "CherubStatue_Character", "GardenVine2_Character", "GardenVine1_Character"]
+
+PhysicsObj_Sprites = ["CastleAssetBookcase_Sprite", "CastleAssetBookCase3_Sprite", "CastleAssetBookCase2_Sprite"]
+
+
+
+
+
+EnemyObj_Types = ["1", "2", "3", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "19", "20", "21", "22", "24", "25", "27", "28", "29", "30", "31", "32", "33"]
+
+EnemyObj_Types = ["Ball & Chain": 1, "Blob": 2, "Bouncy Spike": 3, "Earth Wizard": 5, "Eyeball": 6, "Fairy": 7, "Fireball": 8, "Fire Wizard": 9, "Horse": 10, "Ice Wizard": 11, "Knight": 12, "Ninja": 13, "Shield Knight": 14, "Skeleton": 15, "Sword Knight": 16, "Turret": 17, "Wolf": 19, "Zombie": 20, "Spike Trap": 21, "Plant": 22, "Energon": 23, "Spark": 24, "Skeleton Archer": 25, "Chicken": 26, "Platform": 27, "Homing Turret": 28, "Last Boss": 29, "Dummy": 30, "Starburst": 31, "Portrait": 32, "Mimic": 33];
+
+EnemyObj_Sprites = ["Ball & Chain": "EnemyFlailKnight_Character", "Blob": "EnemyBlobIdle_Character", "Bouncy Spike": "EnemyBouncySpike_Character", "Earth Wizard": "EnemyWizardIdle_Character", "Eyeball": "EnemyEyeballIdle_Character", "Fairy": "EnemyFairyGhostIdle_Character", "Fireball": "EnemyGhostIdle_Character", "Fire Wizard": "EnemyWizardIdle_Character", "Horse": "EnemyHorseRun_Character", "Ice Wizard": "EnemyWizardIdle_Character", "Knight": "EnemySpearKnightIdle_Character", "Ninja": "EnemyNinjaIdle_Character", "Shield Knight": "EnemyShieldKnightIdle_Character", "Skeleton": "EnemySkeletonIdle_Character", "Sword Knight": "EnemySwordKnightIdle_Character", "Turret": "EnemyTurretFire_Character", "Wolf": "EnemyWargIdle_Character", "Zombie": "EnemyZombieRise_Character", "Spike Trap": "EnemySpikeTrap_Character", "Plant": "EnemyPlantIdle_Character", "Spark": "EnemySpark_Character", "Skeleton Archer": "EnemySkeletonArcherIdle_Character", "Platform": "EnemyPlatform_Character", "Homing Turret": "EnemyHomingTurret_Character", "Last Boss": "PlayerIdle_Character", "Dummy": "Dummy_Character", "Starburst": "EnemyStarburstIdle_Character", "Portrait": "EnemyPortrait_Character", "Mimic": "2"EnemyMimicIdle_Character"];
+

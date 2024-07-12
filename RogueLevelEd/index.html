@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>R4wizard :: RoguePatch :: Room Editor</title>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link href='//fonts.googleapis.com/css?family=Exo+2:400,200,300,500,600' rel='stylesheet' type='text/css'>
+	<link href='bootstrap.min.css' rel='stylesheet' type='text/css'>
+	<link href='bootstrap-theme.min.css' rel='stylesheet' type='text/css'>
+	<link href='//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
+	<link href='rogueleveled.css' rel='stylesheet' type='text/css'>
+
+	<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/screenfull.js/1.0.4/screenfull.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="keypress-1.0.9.min.js"></script>
+	<script src="multidrag.js"></script>
+	<script src="bounds.js"></script>
+	<script src="rogueleveled.js"></script>
+</head>
+<body>
+	<div class="modal fade" id="loadModal" tabindex="-1" role="dialog" aria-labelledby="loadModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Load Room</h4>
+				</div>
+				<div class="modal-body">
+					<textarea class="load-room-textarea" style="width: 100%;" rows="15">
+			 <RoomObject Name="Room_Obj 1" X="-2400" Y="-3480" Width="1320" Height="720" ScaleX="1" ScaleY="1" Tag="" SelectionMode="0" DisplayBG="False" CastlePool="True" GardenPool="True" TowerPool="True" DungeonPool="True">
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-2400" Y="-3420" Width="180" Height="180" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull17" X="-2400" Y="-2820" Width="540" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull17" X="-1620" Y="-2820" Width="540" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-2400" Y="-3060" Width="300" Height="240" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-1260" Y="-3420" Width="180" Height="180" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-1380" Y="-3060" Width="300" Height="240" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-2100" Y="-2940" Width="120" Height="120" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-1500" Y="-2940" Width="120" Height="120" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-2220" Y="-3420" Width="240" Height="180" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-1980" Y="-3420" Width="480" Height="120" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull11" X="-1500" Y="-3420" Width="240" Height="180" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="CollHullObj" Name="Coll_Hull17" X="-2400" Y="-3480" Width="1320" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="True" CollidesLeft="True" CollidesRight="True" LevelType="0" />
+	<GameObject Type="EnemyOrbObj" Name="!Bottom" X="-1740.712" Y="-3120.046" Width="75" Height="75" ScaleX="3" ScaleY="3" Rotation="0" Flip="False" Tag="" OrbType="0" ForceFlying="False" IsWaypoint="False" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-1980" Y="-3360" Width="480" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="False" CollidesBottom="True" CollidesLeft="False" CollidesRight="False" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-1500" Y="-3300" Width="300" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="False" CollidesBottom="True" CollidesLeft="True" CollidesRight="False" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-2280" Y="-3300" Width="300" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="False" CollidesBottom="True" CollidesLeft="False" CollidesRight="True" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-2280" Y="-3060" Width="180" Height="120" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="False" CollidesLeft="False" CollidesRight="True" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-2100" Y="-2940" Width="120" Height="120" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="False" CollidesLeft="False" CollidesRight="True" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-1500" Y="-2940" Width="120" Height="120" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="False" CollidesLeft="True" CollidesRight="False" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-1380" Y="-3060" Width="180" Height="120" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="False" CollidesLeft="True" CollidesRight="False" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-1620" Y="-2820" Width="120" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="False" CollidesLeft="False" CollidesRight="False" LevelType="0" />
+	<GameObject Type="BorderObj" Name="Coll_Hull 2270" X="-1980" Y="-2820" Width="120" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" CollidesTop="True" CollidesBottom="False" CollidesLeft="False" CollidesRight="False" LevelType="0" />
+	<GameObject Type="ChestObj" Name="!Right" X="-1320" Y="-3120" Width="60" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" Fairy="False" LevelType="0" />
+	<GameObject Type="DoorObj" Name="Coll_Hull20" X="-2400" Y="-3240" Width="120" Height="180" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" DoorPos="Left" BossDoor="False" LevelType="0" />
+	<GameObject Type="DoorObj" Name="Coll_Hull20" X="-1200" Y="-3240" Width="120" Height="180" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" DoorPos="Right" BossDoor="False" LevelType="0" />
+	<GameObject Type="DoorObj" Name="Coll_Hull22" X="-1860" Y="-2820" Width="240" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" DoorPos="Bottom" BossDoor="False" LevelType="0" />
+	<GameObject Type="SpriteObj" Name="Sprite_Obj 245" X="-1920" Y="-3180" Width="122" Height="194" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="CastleAssetWindow2_Sprite" BGLayer="True" LevelType="1" />
+	<GameObject Type="SpriteObj" Name="Sprite_Obj 247" X="-1560" Y="-3180" Width="122" Height="172" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="CastleAssetWindow1_Sprite" BGLayer="True" LevelType="1" />
+	<GameObject Type="SpriteObj" Name="Sprite_Obj 247" X="-1980" Y="-3300" Width="68" Height="60" ScaleX="1" ScaleY="1" Rotation="0" Flip="False" Tag="" SpriteName="CastleAssetWeb2_Sprite" BGLayer="True" LevelType="1" />
+	<GameObject Type="ObjContainer" Name="Container_Obj 248" X="-1740" Y="-3000" Width="60" Height="74" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="CastleAssetBackTorch_Character" Weighted="False" Collidable="False" Breakable="False" BGLayer="True" LevelType="1" />
+	<GameObject Type="ObjContainer" Name="Container_Obj 248" X="-2160" Y="-3180" Width="60" Height="74" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="CastleAssetBackTorch_Character" Weighted="False" Collidable="False" Breakable="False" BGLayer="True" LevelType="1" />
+	<GameObject Type="ObjContainer" Name="Container_Obj 248" X="-1320" Y="-3180" Width="60" Height="74" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="CastleAssetBackTorch_Character" Weighted="False" Collidable="False" Breakable="False" BGLayer="True" LevelType="1" />
+	<GameObject Type="PhysicsObjContainer" Name="Container_Obj 251" X="-2040" Y="-2940" Width="60" Height="64" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="BreakableBarrel1_Character" Weighted="False" Collidable="False" Breakable="True" BGLayer="False" LevelType="1" />
+	<GameObject Type="PhysicsObjContainer" Name="Container_Obj 255" X="-1920" Y="-2820" Width="74" Height="58" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="BreakableBarrel2_Character" Weighted="False" Collidable="False" Breakable="True" BGLayer="False" LevelType="1" />
+	<GameObject Type="PhysicsObjContainer" Name="Container_Obj 253" X="-1740" Y="-3300" Width="76" Height="96" ScaleX="2" ScaleY="2" Rotation="0" Flip="False" Tag="" SpriteName="CastleAssetChandelier1_Character" Weighted="False" Collidable="False" Breakable="True" BGLayer="False" LevelType="1" />
+  </RoomObject>
+
+					</textarea>
+					<span class="text-muted pull-right">(paste the room xml here)</span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary load-room-button">Load</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="loadModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Save Room</h4>
+				</div>
+				<div class="modal-body">
+					<textarea class="save-room-textarea" style="width: 100%;" rows="15"></textarea>
+					<span class="text-muted pull-right">(copy the room xml from here into your file)</span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="toolbox-bar hide-fullscreen">
+		<div class="toolbox">
+			Loading...
+		</div>
+	</div>
+
+	<div class="toolbar hide-fullscreen text-center">
+		<div class="left">
+			<div class="btn-group">
+				<a href="#" class="btn btn-primary btn-xs btn-labeled distraction-free-button">
+					<span class="btn-label"><i class="fa fa-outdent"></i></span> Distraction Free
+				</a>
+			</div>
+			&nbsp;
+			<a href="#" class="btn btn-warning btn-xs btn-labeled room-settings-button">
+				<span class="btn-label"><i class="fa fa-cog"></i></span> Room Settings
+			</a>
+			&nbsp;
+			<a href="notes.txt" class="btn btn-warning btn-xs btn-labeled" target="_blank">
+				<span class="btn-label"><i class="fa fa-cog"></i></span> Further Reading
+			</a>
+			&nbsp;
+		</div>
+		<a href="#" class="btn btn-default btn-xs status">RogueLevelEd by R4wizard</a>
+		<div class="right">
+			<a href="#" class="btn btn-success btn-xs btn-labeled" data-toggle="modal" data-target="#loadModal">
+				<span class="btn-label"><i class="fa fa-cloud-upload"></i></span> Load
+			</a>
+			&nbsp;
+			<a href="#" class="btn btn-success btn-xs btn-labeled save-room-button">
+				<span class="btn-label"><i class="fa fa-save"></i></span> Save
+			</a>
+			&nbsp;
+		</div>
+	</div>
+
+	<div class="levelview"><br class="hide-fullscreen" /><br class="hide-fullscreen" />
+		<div class="levelbb">
+			<div class="level">
+			</div>
+		</div>
+
+		<div id="contextMenu">
+			<ul class="dropdown-menu" role="menu" style="display: block; position: static; margin-bottom: 5px;">
+				<li><a href="#" class="add-object-button" data-type="CollHullObj">CollHullObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="EnemyOrbObj">EnemyOrbObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="BorderObj">BorderObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="ChestObj">ChestObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="DoorObj">DoorObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="SpriteObj">SpriteObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="ObjContainer">ObjContainer</a></li>
+				<li><a href="#" class="add-object-button" data-type="PhysicsObjContainer">PhysicsObjContainer</a></li>
+				<li><a href="#" class="add-object-button" data-type="EnemyObj">EnemyObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="PhysicsObj">PhysicsObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="HazardObj">HazardObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="EnemyObj">EnemyObj</a></li>
+				<li><a href="#" class="add-object-button" data-type="PlayerStartObj">PlayerStartObj</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
